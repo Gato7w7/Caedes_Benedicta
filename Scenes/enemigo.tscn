@@ -1,0 +1,89 @@
+[gd_scene load_steps=13 format=3 uid="uid://bcgr0re0co0s1"]
+
+[ext_resource type="Texture2D" uid="uid://cujbi7feg2mnq" path="res://Assets/Enemigo.png" id="1_mwaop"]
+[ext_resource type="Script" uid="uid://w7slh4qo4cyw" path="res://Scripts/enemigo.gd" id="1_t4vig"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4vig"]
+atlas = ExtResource("1_mwaop")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6hm1l"]
+atlas = ExtResource("1_mwaop")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y42jf"]
+atlas = ExtResource("1_mwaop")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4kvw7"]
+atlas = ExtResource("1_mwaop")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ushq4"]
+atlas = ExtResource("1_mwaop")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ye8yw"]
+atlas = ExtResource("1_mwaop")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8l51y"]
+atlas = ExtResource("1_mwaop")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75jbx"]
+atlas = ExtResource("1_mwaop")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ushq4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4vig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6hm1l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y42jf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4kvw7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ushq4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ye8yw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8l51y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75jbx")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mwaop"]
+size = Vector2(8, 18)
+
+[node name="Enemigo" type="CharacterBody2D"]
+script = ExtResource("1_t4vig")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ushq4")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.46016622
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 1)
+shape = SubResource("RectangleShape2D_mwaop")
