@@ -1091,7 +1091,8 @@ texture = ExtResource("3_wrm1d")
 14:33/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_wowpa"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 3
 sources/0 = SubResource("TileSetAtlasSource_3dryh")
 
 [node name="Game" type="Node2D"]
