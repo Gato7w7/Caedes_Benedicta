@@ -2,14 +2,21 @@ extends CharacterBody2D
 
 const SPEED = 150.0
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-
 var last_direction := "down"  # Para recordar hacia dónde estaba mirando
 
 # Variable para controlar el cooldown de daño
 var can_take_damage := true
 
+# === VARIABLES DE VIDA ===
+var max_health = 100.0
+var current_health = 100.0
+@onready var health_bar = $"../CanvasLayer/Control/TextureProgressBar"
+
 func _ready() -> void:
 	sprite.play("nidle_down") # Animación inicial
+	# Configurar barra de vida
+	health_bar.max_value = max_health
+	health_bar.value = current_health
 
 func _physics_process(delta: float) -> void:
 	var input_vector = Vector2.ZERO
@@ -29,15 +36,14 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	# --- DETECCIÓN DE DAÑO DE ENEMIGOS ---
-	# Esto es ADICIONAL a las colisiones físicas que ya maneja move_and_slide()
 	if can_take_damage:
 		for i in range(get_slide_collision_count()):
 			var collision = get_slide_collision(i)
 			var collider = collision.get_collider()
 			if collider.is_in_group("enemigos"):
-				print("¡Recibiste daño!")
+				take_damage(20)  # Aquí se llama a la función de daño
 				can_take_damage = false
-				# Crear timer para reactivar el daño después de 1 segundo
+				# Crea el timer para reactivar el daño después de 1 segundo
 				get_tree().create_timer(1.0).timeout.connect(_on_damage_cooldown_finished)
 				break  # Solo un daño de enemigo por frame
 	
@@ -67,3 +73,19 @@ func _physics_process(delta: float) -> void:
 # Función que se ejecuta cuando termina el cooldown de daño
 func _on_damage_cooldown_finished() -> void:
 	can_take_damage = true
+
+# === FUNCIONES DE VIDA ===
+func take_damage(amount):
+	current_health -= amount
+	current_health = clamp(current_health, 0, max_health)
+	health_bar.value = current_health
+	print("¡Recibiste daño! Vida actual: ", current_health)
+	
+	if current_health <= 0:
+		die()
+
+func die():
+	print("=== ¡PERSONAJE MUERTO! ===")
+	# Aquí puedes agregar tu lógica de muerte después
+	# Por ejemplo: queue_free() o cambiar a escena de game over
+	#get_tree().change_scene_to_file("res://Scenes/menu.tscn")
