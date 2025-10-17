@@ -7,6 +7,9 @@ var last_direction := "down"  # Para recordar hacia dónde estaba mirando
 # Variable para controlar el cooldown de daño
 var can_take_damage := true
 
+# Variable para controlar si está atacando
+var is_attacking := false
+
 # === VARIABLES DE VIDA ===
 var max_health = 100.0
 var current_health = 100.0
@@ -14,11 +17,21 @@ var current_health = 100.0
 
 func _ready() -> void:
 	sprite.play("nidle_down") # Animación inicial
+	
 	# Configurar barra de vida
 	health_bar.max_value = max_health
 	health_bar.value = current_health
+	
+	# Conectar señal de animación terminada
+	sprite.animation_finished.connect(_on_animation_finished)
 
 func _physics_process(delta: float) -> void:
+	# Si está atacando, no procesar movimiento
+	if is_attacking:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+	
 	var input_vector = Vector2.ZERO
 	
 	# Movimiento en los 2 ejes
@@ -69,6 +82,42 @@ func _physics_process(delta: float) -> void:
 		elif input_vector.y > 0:
 			sprite.play("nwalk_down")
 			last_direction = "down"
+
+func _input(event: InputEvent) -> void:
+	# Detectar clic derecho del mouse
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and not is_attacking:
+			perform_attack()
+
+# Función para ejecutar el ataque
+func perform_attack() -> void:
+	is_attacking = true
+	
+	# Ejecutar animación según la dirección
+	match last_direction:
+		"down":
+			sprite.play("attack_down")
+		"up":
+			sprite.play("attack_up")
+		"side":
+			sprite.play("attack_side")
+
+# Función que se ejecuta cuando termina una animación
+func _on_animation_finished() -> void:
+	# Solo procesar si era una animación de ataque
+	if is_attacking:
+		var current_anim = sprite.animation
+		# Verificar que realmente terminó una animación de ataque
+		if current_anim.begins_with("attack_"):
+			is_attacking = false
+			# Volver a la animación idle correspondiente
+			match last_direction:
+				"down":
+					sprite.play("nidle_down")
+				"up":
+					sprite.play("nidle_up")
+				"side":
+					sprite.play("nidle_side")
 
 # Función que se ejecuta cuando termina el cooldown de daño
 func _on_damage_cooldown_finished() -> void:
