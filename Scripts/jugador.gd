@@ -2,12 +2,11 @@ extends CharacterBody2D
 
 const SPEED = 150.0
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-var last_direction := "down"  # Para recordar hacia dónde estaba mirando
+@onready var hitbox_area: Area2D = $HitboxArea
+@onready var hitbox_shape: CollisionShape2D = $HitboxArea/HitboxShape
 
-# Variable para controlar el cooldown de daño
+var last_direction := "down"
 var can_take_damage := true
-
-# Variable para controlar si está atacando
 var is_attacking := false
 
 # === VARIABLES DE VIDA ===
@@ -15,18 +14,25 @@ var max_health = 100.0
 var current_health = 100.0
 @onready var health_bar = $"../CanvasLayer/Control/TextureProgressBar"
 
+# === VARIABLES DE ATAQUE ===
+var attack_damage = 25.0
+var enemies_hit_this_attack = []  # Para evitar golpear múltiples veces
+
 func _ready() -> void:
-	sprite.play("nidle_down") # Animación inicial
+	sprite.play("nidle_down")
 	
 	# Configurar barra de vida
 	health_bar.max_value = max_health
 	health_bar.value = current_health
 	
-	# Conectar señal de animación terminada
+	# Conectar señales
 	sprite.animation_finished.connect(_on_animation_finished)
+	hitbox_area.body_entered.connect(_on_hitbox_body_entered)
+	
+	# Desactivar hitbox al inicio
+	hitbox_area.monitoring = false
 
 func _physics_process(delta: float) -> void:
-	# Si está atacando, no procesar movimiento
 	if is_attacking:
 		velocity = Vector2.ZERO
 		move_and_slide()
@@ -34,7 +40,6 @@ func _physics_process(delta: float) -> void:
 	
 	var input_vector = Vector2.ZERO
 	
-	# Movimiento en los 2 ejes
 	if Input.is_action_pressed("ui_right"):
 		input_vector.x += 1
 	if Input.is_action_pressed("ui_left"):
@@ -48,21 +53,19 @@ func _physics_process(delta: float) -> void:
 	velocity = input_vector * SPEED
 	move_and_slide()
 	
-	# --- DETECCIÓN DE DAÑO DE ENEMIGOS ---
+	# Detección de daño de enemigos
 	if can_take_damage:
 		for i in range(get_slide_collision_count()):
 			var collision = get_slide_collision(i)
 			var collider = collision.get_collider()
 			if collider.is_in_group("enemigos"):
-				take_damage(20)  # Aquí se llama a la función de daño
+				take_damage(20)
 				can_take_damage = false
-				# Crea el timer para reactivar el daño después de 1 segundo
 				get_tree().create_timer(1.0).timeout.connect(_on_damage_cooldown_finished)
-				break  # Solo un daño de enemigo por frame
+				break
 	
-	# Lógica de animación
+	# Animaciones
 	if input_vector == Vector2.ZERO:
-		# Quieto → idle en la última dirección
 		match last_direction:
 			"down":
 				sprite.play("nidle_down")
@@ -71,7 +74,6 @@ func _physics_process(delta: float) -> void:
 			"side":
 				sprite.play("nidle_side")
 	else:
-		# Movimiento
 		if input_vector.x != 0:
 			sprite.play("nwalk_side")
 			sprite.flip_h = input_vector.x < 0
@@ -84,14 +86,16 @@ func _physics_process(delta: float) -> void:
 			last_direction = "down"
 
 func _input(event: InputEvent) -> void:
-	# Detectar clic derecho del mouse
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and not is_attacking:
 			perform_attack()
 
-# Función para ejecutar el ataque
 func perform_attack() -> void:
 	is_attacking = true
+	enemies_hit_this_attack.clear()  # Resetear enemigos golpeados
+	
+	# Ajustar posición y rotación del hitbox según dirección
+	adjust_hitbox_for_direction()
 	
 	# Ejecutar animación según la dirección
 	match last_direction:
@@ -101,16 +105,63 @@ func perform_attack() -> void:
 			sprite.play("attack_up")
 		"side":
 			sprite.play("attack_side")
+	
+	# Activar hitbox después de unos frames (cuando el swing empieza)
+	await get_tree().create_timer(0.1).timeout
+	enable_hitbox()
+	
+	# Desactivar hitbox después del swing
+	await get_tree().create_timer(0.3).timeout
+	disable_hitbox()
 
-# Función que se ejecuta cuando termina una animación
+# Ajustar posición del hitbox según la dirección
+func adjust_hitbox_for_direction() -> void:
+	var offset = Vector2.ZERO
+	var shape = hitbox_shape.shape as RectangleShape2D
+	
+	match last_direction:
+		"down":
+			offset = Vector2(0, 25)  # Adelante hacia abajo
+			shape.size = Vector2(40, 30)
+		"up":
+			offset = Vector2(0, -25)  # Adelante hacia arriba
+			shape.size = Vector2(40, 30)
+		"side":
+			if sprite.flip_h:  # Izquierda
+				offset = Vector2(-25, 0)
+			else:  # Derecha
+				offset = Vector2(25, 0)
+			shape.size = Vector2(30, 40)
+	
+	hitbox_area.position = offset
+
+func enable_hitbox() -> void:
+	hitbox_area.monitoring = true
+	print("Hitbox activado")
+
+func disable_hitbox() -> void:
+	hitbox_area.monitoring = false
+	print("Hitbox desactivado")
+
+# Cuando el hitbox colisiona con algo
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemigos"):
+		# Evitar golpear al mismo enemigo múltiples veces en un ataque
+		if body in enemies_hit_this_attack:
+			return
+		
+		enemies_hit_this_attack.append(body)
+		
+		# Llamar a la función de daño del enemigo
+		if body.has_method("take_damage"):
+			body.take_damage(attack_damage)
+			print("¡Golpeaste a un enemigo!")
+
 func _on_animation_finished() -> void:
-	# Solo procesar si era una animación de ataque
 	if is_attacking:
 		var current_anim = sprite.animation
-		# Verificar que realmente terminó una animación de ataque
 		if current_anim.begins_with("attack_"):
 			is_attacking = false
-			# Volver a la animación idle correspondiente
 			match last_direction:
 				"down":
 					sprite.play("nidle_down")
@@ -119,11 +170,9 @@ func _on_animation_finished() -> void:
 				"side":
 					sprite.play("nidle_side")
 
-# Función que se ejecuta cuando termina el cooldown de daño
 func _on_damage_cooldown_finished() -> void:
 	can_take_damage = true
 
-# === FUNCIONES DE VIDA ===
 func take_damage(amount):
 	current_health -= amount
 	current_health = clamp(current_health, 0, max_health)
@@ -135,6 +184,3 @@ func take_damage(amount):
 
 func die():
 	print("=== ¡PERSONAJE MUERTO! ===")
-	# Aquí puedes agregar tu lógica de muerte después
-	# Por ejemplo: queue_free() o cambiar a escena de game over
-	#get_tree().change_scene_to_file("res://Scenes/menu.tscn")

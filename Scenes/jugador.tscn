@@ -1,4 +1,4 @@
-[gd_scene load_steps=120 format=3 uid="uid://dmcuhd0kvhkgc"]
+[gd_scene load_steps=121 format=3 uid="uid://dmcuhd0kvhkgc"]
 
 [ext_resource type="Script" uid="uid://iys5d8qaptpk" path="res://Scripts/jugador.gd" id="1_c1mnh"]
 [ext_resource type="Texture2D" uid="uid://cr4hgcrcy71at" path="res://Assets/Personaje/attack1_down.png" id="2_aknpy"]
@@ -798,6 +798,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5ydob"]
 size = Vector2(8, 18)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aknpy"]
+
 [node name="Jugador" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_mask = 2
@@ -813,3 +815,12 @@ frame_progress = 0.44446126
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_5ydob")
+
+[node name="HitboxArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+monitoring = false
+
+[node name="HitboxShape" type="CollisionShape2D" parent="HitboxArea"]
+position = Vector2(3, 27)
+shape = SubResource("RectangleShape2D_aknpy")
