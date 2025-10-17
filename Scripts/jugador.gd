@@ -119,21 +119,28 @@ func adjust_hitbox_for_direction() -> void:
 	var offset = Vector2.ZERO
 	var shape = hitbox_shape.shape as RectangleShape2D
 	
+	# Ajustar según la dirección actual
 	match last_direction:
 		"down":
-			offset = Vector2(0, 25)  # Adelante hacia abajo
-			shape.size = Vector2(40, 30)
+			offset = Vector2(0, -5)  # Adelante hacia abajo
+			shape.size = Vector2(35, 25)
+			hitbox_shape.rotation_degrees = 0
+			
 		"up":
-			offset = Vector2(0, -25)  # Adelante hacia arriba
-			shape.size = Vector2(40, 30)
+			offset = Vector2(0, -35)  # Adelante hacia arriba
+			shape.size = Vector2(35, 25)
+			hitbox_shape.rotation_degrees = 0
+			
 		"side":
-			if sprite.flip_h:  # Izquierda
-				offset = Vector2(-25, 0)
-			else:  # Derecha
-				offset = Vector2(25, 0)
-			shape.size = Vector2(30, 40)
+			shape.size = Vector2(25, 35)
+			hitbox_shape.rotation_degrees = 0
+			if sprite.flip_h:  # Mirando a la izquierda
+				offset = Vector2(-20, -25)
+			else:  # Mirando a la derecha
+				offset = Vector2(20, -23)
 	
 	hitbox_area.position = offset
+	
 
 func enable_hitbox() -> void:
 	hitbox_area.monitoring = true
