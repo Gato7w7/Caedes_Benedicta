@@ -1,7 +1,8 @@
-[gd_scene load_steps=32 format=3 uid="uid://bcgr0re0co0s1"]
+[gd_scene load_steps=30 format=3 uid="uid://bcgr0re0co0s1"]
 
 [ext_resource type="Texture2D" uid="uid://cujbi7feg2mnq" path="res://Assets/Enemigo.png" id="1_mwaop"]
 [ext_resource type="Script" uid="uid://w7slh4qo4cyw" path="res://Scripts/enemigo.gd" id="1_t4vig"]
+[ext_resource type="AudioStream" uid="uid://cscjrtwasnkfl" path="res://Assets/death-sound-enemy.mp3" id="3_6hm1l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qt143"]
 atlas = ExtResource("1_mwaop")
@@ -50,18 +51,6 @@ region = Rect2(32, 32, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_4kvw7"]
 atlas = ExtResource("1_mwaop")
 region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2ie5q"]
-atlas = ExtResource("1_mwaop")
-region = Rect2(0, 192, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vuyf6"]
-atlas = ExtResource("1_mwaop")
-region = Rect2(32, 192, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6043i"]
-atlas = ExtResource("1_mwaop")
-region = Rect2(64, 192, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p3jwc"]
 atlas = ExtResource("1_mwaop")
@@ -161,20 +150,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2ie5q")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vuyf6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6043i")
-}],
-"loop": true,
-"name": &"muerte1",
-"speed": 7.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_p3jwc")
 }, {
 "duration": 1.0,
@@ -198,8 +173,8 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_f0wvv")
 }],
-"loop": true,
-"name": &"muerte2",
+"loop": false,
+"name": &"muerte",
 "speed": 7.0
 }, {
 "frames": [{
@@ -229,10 +204,15 @@ script = ExtResource("1_t4vig")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ushq4")
-animation = &"walk"
+animation = &"muerte"
 autoplay = "idle"
-frame_progress = 0.031126969
+frame = 7
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["enemigos"]]
 position = Vector2(-1, 1)
 shape = SubResource("RectangleShape2D_mwaop")
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_6hm1l")
+volume_db = -7.755

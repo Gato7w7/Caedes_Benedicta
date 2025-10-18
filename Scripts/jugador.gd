@@ -4,6 +4,7 @@ const SPEED = 150.0
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hitbox_area: Area2D = $HitboxArea
 @onready var hitbox_shape: CollisionShape2D = $HitboxArea/HitboxShape
+@onready var attack_sound: AudioStreamPlayer2D = $AttackSound  # ← AGREGAR
 
 var last_direction := "down"
 var can_take_damage := true
@@ -105,6 +106,15 @@ func perform_attack() -> void:
 			sprite.play("attack_up")
 		"side":
 			sprite.play("attack_side")
+			
+		# PRIMER SLASH - Reproducir sonido y activar hitbox
+	attack_sound.play()  # ← PRIMER SONIDO
+	await get_tree().create_timer(0.1).timeout
+	enable_hitbox()
+	
+	# SEGUNDO SLASH - Reproducir sonido nuevamente
+	await get_tree().create_timer(0.2).timeout  # Tiempo entre slashes
+	attack_sound.play()  # ← SEGUNDO SONIDO
 	
 	# Activar hitbox después de unos frames (cuando el swing empieza)
 	await get_tree().create_timer(0.1).timeout

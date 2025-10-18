@@ -1,4 +1,4 @@
-[gd_scene load_steps=121 format=3 uid="uid://dmcuhd0kvhkgc"]
+[gd_scene load_steps=122 format=3 uid="uid://dmcuhd0kvhkgc"]
 
 [ext_resource type="Script" uid="uid://iys5d8qaptpk" path="res://Scripts/jugador.gd" id="1_c1mnh"]
 [ext_resource type="Texture2D" uid="uid://cr4hgcrcy71at" path="res://Assets/Personaje/attack1_down.png" id="2_aknpy"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://1d6criw8u8af" path="res://Assets/Personaje/run_down_mod.png" id="10_fr03m"]
 [ext_resource type="Texture2D" uid="uid://2bqa7h5o57m2" path="res://Assets/Personaje/run_side_mod.png" id="11_fr03m"]
 [ext_resource type="Texture2D" uid="uid://dtsi54yf5ped1" path="res://Assets/Personaje/run_up_mod.png" id="12_yy7ku"]
+[ext_resource type="AudioStream" uid="uid://5musq36miwkn" path="res://Assets/sword-sound-260274.mp3" id="14_1bknw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bkffa"]
 atlas = ExtResource("2_aknpy")
@@ -824,3 +825,7 @@ monitoring = false
 [node name="HitboxShape" type="CollisionShape2D" parent="HitboxArea"]
 position = Vector2(3, 27)
 shape = SubResource("RectangleShape2D_aknpy")
+
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_1bknw")
+volume_db = -10.12
