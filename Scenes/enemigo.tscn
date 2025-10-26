@@ -204,10 +204,9 @@ script = ExtResource("1_t4vig")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ushq4")
-animation = &"muerte"
+animation = &"walk"
 autoplay = "idle"
-frame = 7
-frame_progress = 1.0
+frame_progress = 0.45684692
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["enemigos"]]
 position = Vector2(-1, 1)
