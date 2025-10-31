@@ -6,5 +6,5 @@ PAUSA,Pausa,Pause
 Reanudar,Reanudar,Continue
 Salir,Salir,Exit
 Opciones,Opciones,Options
-Silenciar Audio,Silenciar Audio,Mute Audio
+audio_mute,Silenciar Audio,Mute Audio
 Volumen,Volumen,Volume

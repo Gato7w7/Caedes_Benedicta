@@ -48,11 +48,11 @@ horizontal_alignment = 1
 
 [node name="MuteCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Slienciar Audio"
+text = "audio_mute"
 
 [node name="VolumeLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Volumen 100%"
+text = "Volumen"
 
 [node name="VolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

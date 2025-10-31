@@ -19,7 +19,7 @@ func _ready() -> void:
 	
 	# Actualizar estado inicial
 	_update_volume_slider_state()
-	_update_volume_label()
+	#_update_volume_label()
 
 func _on_mute_toggled(is_muted: bool) -> void:
 	# Mutear o desmutear el audio
@@ -38,7 +38,7 @@ func _on_volume_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(MASTER_BUS, db)
 	
 	# Actualizar etiqueta
-	_update_volume_label()
+	#_update_volume_label()
 	
 	# Guardar configuración
 	save_audio_settings()
@@ -47,9 +47,9 @@ func _update_volume_slider_state() -> void:
 	# Deshabilitar slider si está muteado
 	volume_slider.editable = not mute_checkbox.button_pressed
 
-func _update_volume_label() -> void:
+#func _update_volume_label() -> void:
 	# Mostrar el volumen como porcentaje
-	volume_label.text = "Volumen: %d%%" % int(volume_slider.value)
+	#volume_label.text = "Volumen: %d%%" % int(volume_slider.value)
 
 func _on_back_pressed() -> void:
 	# Volver al menú principal
