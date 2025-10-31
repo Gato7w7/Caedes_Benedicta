@@ -1,6 +1,6 @@
-,spanish,english
+keys,es,en
 JUGAR,Jugar,Play
-OPCIONES,Opciones,Options
+Volver,Volver,Back
 SALIR,Salir,Exit
 PAUSA,Pausa,Pause
 Reanudar,Reanudar,Continue
@@ -8,4 +8,3 @@ Salir,Salir,Exit
 Opciones,Opciones,Options
 Silenciar Audio,Silenciar Audio,Mute Audio
 Volumen,Volumen,Volume
-Volver,Volver,Back
