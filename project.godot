@@ -63,6 +63,10 @@ Hit={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://Assets/Traduccion.english.translation", "res://Assets/Traduccion.spanish.translation")
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
