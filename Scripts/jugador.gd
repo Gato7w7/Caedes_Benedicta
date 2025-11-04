@@ -105,6 +105,7 @@ func perform_attack() -> void:
 		"up":
 			sprite.play("attack_up")
 		"side":
+			sprite.flip_h = !sprite.flip_h
 			sprite.play("attack_side")
 			
 		# PRIMER SLASH - Reproducir sonido y activar hitbox
@@ -185,6 +186,7 @@ func _on_animation_finished() -> void:
 				"up":
 					sprite.play("nidle_up")
 				"side":
+					sprite.flip_h = !sprite.flip_h
 					sprite.play("nidle_side")
 
 func _on_damage_cooldown_finished() -> void:

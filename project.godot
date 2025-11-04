@@ -69,7 +69,7 @@ Hit={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://Assets/Traduccion.csv", "res://Assets/Traduccion.es.translation", "res://Assets/Traduccion.en.translation")
+locale/translations=PackedStringArray("res://Assets/Traduccion.es.translation", "res://Assets/Traduccion.en.translation")
 
 [rendering]
 
