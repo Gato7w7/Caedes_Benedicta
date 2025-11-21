@@ -198,6 +198,13 @@ func take_damage(amount):
 	health_bar.value = current_health
 	print("¡Recibiste daño! Vida actual: ", current_health)
 	
+func heal(amount):
+	current_health += amount
+	current_health = clamp(current_health, 0, max_health)
+	health_bar.value = current_health
+	print("Curación: +", amount, " | Vida actual: ", current_health)
+
+	
 	if current_health <= 0:
 		die()
 

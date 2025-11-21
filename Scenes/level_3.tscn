@@ -1157,3 +1157,9 @@ position = Vector2(18, 162)
 
 [node name="StartPosition" type="Marker2D" parent="."]
 position = Vector2(3, 147)
+
+[node name="SpawnMin" type="Marker2D" parent="."]
+position = Vector2(-187, 96)
+
+[node name="SpawnMax" type="Marker2D" parent="."]
+position = Vector2(217, 201)
