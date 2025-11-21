@@ -1138,3 +1138,9 @@ parameters/looping = true
 
 [node name="StartPosition" type="Marker2D" parent="."]
 position = Vector2(2, 2)
+
+[node name="SpawnMin" type="Marker2D" parent="."]
+position = Vector2(-189, -107)
+
+[node name="SpawnMax" type="Marker2D" parent="."]
+position = Vector2(220, 200)
