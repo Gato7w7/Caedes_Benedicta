@@ -6,7 +6,7 @@ extends Node2D
 var current_level = null
 var current_level_path = ""
 
-# === CONFIGURACIÓN DE NIVELES ===
+# === CONFIGURACIÓN DE NIVELES Alpha===
 var levels_config = {
 	"res://Scenes/level_1.tscn": {
 		"waves": [3, 5],
