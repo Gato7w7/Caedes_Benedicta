@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://uw2ktewgk353"]
+
+[ext_resource type="Script" uid="uid://dwodl4rhb3tlr" path="res://Scripts/muertemenu.gd" id="1_def7s"]
+[ext_resource type="Texture2D" uid="uid://0247ghib8kpu" path="res://Assets/Escenario/backmenu.jpg" id="1_munkb"]
+[ext_resource type="AudioStream" uid="uid://dr2wafaulo7b3" path="res://Assets/Songs/menu.mp3" id="2_def7s"]
+
+[node name="Muertemenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_def7s")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_munkb")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="Muerte" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1.0569379, 0.056700114, 0.16003047, 1)
+theme_override_font_sizes/font_size = 50
+text = "Mortem"
+
+[node name="Des" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1.0569379, 0.056700114, 0.16003047, 1)
+theme_override_font_sizes/font_size = 25
+text = "Munere tuo defecisti 
+et cultores populum 
+tuum necaverunt."
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_def7s")
+volume_db = -5.293
+autoplay = true

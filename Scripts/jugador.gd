@@ -197,16 +197,19 @@ func take_damage(amount):
 	current_health = clamp(current_health, 0, max_health)
 	health_bar.value = current_health
 	print("¡Recibiste daño! Vida actual: ", current_health)
-	
+	if current_health <= 0:
+		die()
+		
 func heal(amount):
 	current_health += amount
 	current_health = clamp(current_health, 0, max_health)
 	health_bar.value = current_health
 	print("Curación: +", amount, " | Vida actual: ", current_health)
 
-	
-	if current_health <= 0:
-		die()
+func _go_to_death_scene():
+	get_tree().change_scene_to_file("res://Scenes/muertemenu.tscn")
+
 
 func die():
 	print("=== ¡PERSONAJE MUERTO! ===")
+	call_deferred("_go_to_death_scene")
