@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://da60daagsmu8f"]
+[gd_scene load_steps=7 format=4 uid="uid://da60daagsmu8f"]
 
 [ext_resource type="Texture2D" uid="uid://c5eupwldpvtwu" path="res://Assets/Escenario/mainlevbuild.png" id="1_76ybr"]
 [ext_resource type="AudioStream" uid="uid://c5h2suq6swpcu" path="res://Assets/Songs/metalsong.mp3" id="2_s8nj6"]
 [ext_resource type="PackedScene" uid="uid://bcgr0re0co0s1" path="res://Scenes/enemigo.tscn" id="3_vwg62"]
+[ext_resource type="PackedScene" uid="uid://ba31qoyv7v3eu" path="res://Scenes/pocion.tscn" id="4_s8nj6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qf6rc"]
 texture = ExtResource("1_76ybr")
@@ -1150,7 +1151,7 @@ position = Vector2(-84, 125)
 position = Vector2(184, 172)
 
 [node name="Enemigo4" parent="." instance=ExtResource("3_vwg62")]
-position = Vector2(-158, 176)
+position = Vector2(-130, 172)
 
 [node name="Enemigo5" parent="." instance=ExtResource("3_vwg62")]
 position = Vector2(18, 162)
@@ -1163,3 +1164,9 @@ position = Vector2(-187, 96)
 
 [node name="SpawnMax" type="Marker2D" parent="."]
 position = Vector2(217, 201)
+
+[node name="Pocion" parent="." instance=ExtResource("4_s8nj6")]
+position = Vector2(-162, 181)
+
+[node name="Pocion2" parent="." instance=ExtResource("4_s8nj6")]
+position = Vector2(214, 105)

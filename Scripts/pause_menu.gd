@@ -40,11 +40,12 @@ func _on_exit_pressed():
 	# Desactivar la pausa antes de salir
 	get_tree().paused = false
 	
-	# Opción 1: Volver al menú principal
-	get_tree().change_scene_to_file("res://Scenes/menu.tscn")
+	# Guardar progreso y volver al menú
+	var game = get_tree().current_scene
 	
-	# Opción 2: Salir completamente del juego
-	# get_tree().quit()
-	
-	# Opción 3: Reiniciar la escena actual
-	# get_tree().reload_current_scene()
+	if game and game.has_method("exit_to_menu"):
+		game.exit_to_menu()  # Esto guarda automáticamente el progreso
+	else:
+		# Fallback por si no encuentra la función
+		print("No se encontró game.exit_to_menu(), saliendo sin guardar")
+		get_tree().change_scene_to_file("res://Scenes/menu.tscn")

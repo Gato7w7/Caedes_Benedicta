@@ -32,7 +32,14 @@ var min_distance_from_player = 150.0
 var spawn_margin_from_player = 300.0
 
 func _ready():
-	load_level("res://Scenes/level_1.tscn")
+	# CAMBIO: Cargar nivel desde LocaleManager si hay ranura activa
+	var initial_level = "res://Scenes/level_1.tscn"
+	
+	if LocaleManager.current_slot > 0:
+		# Si hay ranura activa, usar el nivel guardado
+		initial_level = LocaleManager.load_slot(LocaleManager.current_slot)
+	
+	load_level(initial_level)
 
 func load_level(level_path: String):
 	if current_level:
@@ -42,6 +49,10 @@ func load_level(level_path: String):
 	level_container.add_child(new_level)
 	current_level = new_level
 	current_level_path = level_path
+	
+		# NUEVO: Guardar progreso automáticamente al cargar nivel
+	if LocaleManager.current_slot > 0:
+		LocaleManager.save_current_progress(current_level_path)
 	
 	# Cargar configuración del nivel
 	if levels_config.has(level_path):
@@ -162,3 +173,13 @@ func get_random_spawn_position() -> Vector2:
 		pos.y = clamp(pos.y, spawn_area_min.y, spawn_area_max.y)
 	
 	return pos
+
+# === FUNCIÓN PARA SALIR Y GUARDAR ===
+func exit_to_menu():
+	"""Llamar desde el menú de pausa cuando se presiona 'Salir'"""
+	if LocaleManager.current_slot > 0:
+		LocaleManager.save_current_progress(current_level_path)
+		print("Progreso guardado al salir")
+	
+	LocaleManager.clear_active_slot()  # Limpiar ranura activa
+	get_tree().change_scene_to_file("res://Scenes/menu.tscn")

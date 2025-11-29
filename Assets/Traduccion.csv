@@ -8,3 +8,8 @@ Salir,Salir,Exit
 Opciones,Opciones,Options
 audio_mute,Silenciar Audio,Mute Audio
 Volumen,Volumen,Volume
+save_files,Archivos de Guardado,Save Files
+slot1,Ranura de Guardado 1,Save FIle 1
+slot2,Ranura de Guardado 2,Save FIle 2
+slot3,Ranura de Guardado 3,Save FIle 3
+back_slots,Atras,Back

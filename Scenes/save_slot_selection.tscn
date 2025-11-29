@@ -1,0 +1,75 @@
+[gd_scene load_steps=3 format=3 uid="uid://brighp5oyn1qp"]
+
+[ext_resource type="Texture2D" uid="uid://0247ghib8kpu" path="res://Assets/Escenario/backmenu.jpg" id="1_gulyg"]
+[ext_resource type="Script" uid="uid://drg2v5c6d04ax" path="res://Scripts/save_slot_selection.gd" id="1_wb736"]
+
+[node name="SaveSlotSelection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wb736")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_gulyg")
+expand_mode = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -91.0
+offset_top = -103.0
+offset_right = 91.0
+offset_bottom = 103.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 11
+
+[node name="Label" type="Label" parent="CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "save_files"
+metadata/tr_key = "save_files"
+
+[node name="Slot1Button" type="Button" parent="CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "slot1"
+
+[node name="Slot2Button" type="Button" parent="CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "slot2"
+
+[node name="Slot3Button" type="Button" parent="CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "slot3"
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "back_slots"
