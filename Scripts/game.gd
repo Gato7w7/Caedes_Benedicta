@@ -9,15 +9,15 @@ var current_level_path = ""
 # === CONFIGURACIÓN DE NIVELES Alpha===
 var levels_config = {
 	"res://Scenes/level_1.tscn": {
-		"waves": [3, 5],
+		"waves": [3, 4, 5],
 		"next_level": "res://Scenes/level_2.tscn"
 	},
 	"res://Scenes/level_2.tscn": {
-		"waves": [2, 8],
+		"waves": [2, 5, 8],
 		"next_level": "res://Scenes/level_3.tscn"
 	},
 	"res://Scenes/level_3.tscn": {
-		"waves": [5, 8],
+		"waves": [5, 8, 10],
 		"next_level": "res://Scenes/level_4.tscn"  # Vacío = último nivel
 	},
 	"res://Scenes/level_4.tscn": {
