@@ -1,17 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://uw2ktewgk353"]
+[gd_scene load_steps=4 format=3 uid="uid://b2glgfsblnpfg"]
 
-[ext_resource type="Script" uid="uid://dwodl4rhb3tlr" path="res://Scripts/muertemenu.gd" id="1_def7s"]
-[ext_resource type="Texture2D" uid="uid://0247ghib8kpu" path="res://Assets/Escenario/backmenu.jpg" id="1_munkb"]
-[ext_resource type="AudioStream" uid="uid://dr2wafaulo7b3" path="res://Assets/Songs/menu.mp3" id="2_def7s"]
+[ext_resource type="Script" uid="uid://bxmfxpwhfg252" path="res://Scripts/winmenu.gd" id="1_vgphi"]
+[ext_resource type="Texture2D" uid="uid://0247ghib8kpu" path="res://Assets/Escenario/backmenu.jpg" id="2_xmps1"]
+[ext_resource type="AudioStream" uid="uid://dr2wafaulo7b3" path="res://Assets/Songs/menu.mp3" id="3_slonb"]
 
-[node name="Muertemenu" type="Control"]
+[node name="winmenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 3.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_def7s")
+script = ExtResource("1_vgphi")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -20,7 +21,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_munkb")
+texture = ExtResource("2_xmps1")
 expand_mode = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -30,39 +31,39 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -98.0
+offset_left = -43.5
 offset_top = -56.0
-offset_right = 98.0
+offset_right = 43.5
 offset_bottom = 56.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 8
 
-[node name="Muerte" type="Label" parent="VBoxContainer"]
+[node name="Win" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1.0569379, 0.056700114, 0.16003047, 1)
+theme_override_colors/font_color = Color(0, 0.6886337, 0.26598343, 1)
 theme_override_font_sizes/font_size = 50
-text = "mortem"
+text = "win"
 
 [node name="Des" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1.0569379, 0.056700114, 0.16003047, 1)
+theme_override_colors/font_color = Color(0, 0.69030154, 0.22340505, 1)
 theme_override_font_sizes/font_size = 25
-text = "mun"
+text = "asess"
 
 [node name="Des2" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1.0569379, 0.056700114, 0.16003047, 1)
+theme_override_colors/font_color = Color(0, 0.69030154, 0.22340505, 1)
 theme_override_font_sizes/font_size = 25
-text = "mun2"
+text = "asess2"
 
 [node name="Des3" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1.0569379, 0.056700114, 0.16003047, 1)
+theme_override_colors/font_color = Color(0, 0.69030154, 0.22340505, 1)
 theme_override_font_sizes/font_size = 25
-text = "mun3"
+text = "asess3"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_def7s")
+stream = ExtResource("3_slonb")
 volume_db = -5.293
 autoplay = true

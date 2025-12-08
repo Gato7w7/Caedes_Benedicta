@@ -18,6 +18,14 @@ var levels_config = {
 	},
 	"res://Scenes/level_3.tscn": {
 		"waves": [5, 8],
+		"next_level": "res://Scenes/level_4.tscn"  # Vacío = último nivel
+	},
+	"res://Scenes/level_4.tscn": {
+		"waves": [5, 8, 10],
+		"next_level": "res://Scenes/level_5.tscn"  # Vacío = último nivel
+	},
+	"res://Scenes/level_5.tscn": {
+		"waves": [5, 10, 13],
 		"next_level": ""  # Vacío = último nivel
 	}
 }
@@ -108,7 +116,7 @@ func level_completed():
 	else:
 		print("¡¡¡JUEGO COMPLETADO!!!")
 		# Aquí puedes mostrar pantalla de victoria final
-		# get_tree().change_scene_to_file("res://Scenes/victory_screen.tscn")
+		get_tree().change_scene_to_file("res://Scenes/winmenu.tscn")
 
 func start_next_wave():
 	current_wave += 1

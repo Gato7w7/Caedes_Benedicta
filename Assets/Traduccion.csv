@@ -13,3 +13,11 @@ slot1,Ranura de Guardado 1,Save FIle 1
 slot2,Ranura de Guardado 2,Save FIle 2
 slot3,Ranura de Guardado 3,Save FIle 3
 back_slots,Atras,Back
+win,Ganaste,You Win
+asess,Asesinaste a todos ,You killed all
+mortem,Moriste,You died
+mun,"Moriste, los cultistas ","You died, the cultists "
+mun2,arrasaron tu pueblo ,ravaged your village 
+mun3,y esclavizaron a todos.,and enslaved everyone.
+asess2,los cultistas y salvaste a , the cultists and saved
+asess3,"tu pueblo, por ahora..."," your people, for now..."
