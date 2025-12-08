@@ -199,6 +199,7 @@ animations = [{
 size = Vector2(8, 18)
 
 [node name="Enemigo" type="CharacterBody2D" groups=["enemigos"]]
+z_index = 2
 collision_layer = 2
 script = ExtResource("1_t4vig")
 
