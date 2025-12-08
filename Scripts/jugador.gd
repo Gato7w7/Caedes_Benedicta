@@ -86,10 +86,10 @@ func _physics_process(delta: float) -> void:
 			sprite.play("nwalk_down")
 			last_direction = "down"
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and not is_attacking:
-			perform_attack()
+func _input(event):
+	if Input.is_action_just_pressed("Hit") and not is_attacking:
+		perform_attack()
+
 
 func perform_attack() -> void:
 	is_attacking = true

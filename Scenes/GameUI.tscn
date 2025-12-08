@@ -1,9 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://bl7foqam65ktw"]
+[gd_scene load_steps=17 format=3 uid="uid://bl7foqam65ktw"]
 
 [ext_resource type="Texture2D" uid="uid://bolrwgtha3o6s" path="res://Assets/health_bar/health_bar_decoration.png" id="1_37hul"]
+[ext_resource type="Script" uid="uid://d1xo2onky42uk" path="res://Scripts/game_ui.gd" id="1_j41el"]
 [ext_resource type="Texture2D" uid="uid://4ekcpitfgbj2" path="res://Assets/health_bar/health_bar.png" id="2_po7eo"]
 [ext_resource type="Script" uid="uid://cdpe8qvj5gsrv" path="res://Scripts/pause_menu.gd" id="3_po7eo"]
 [ext_resource type="Script" uid="uid://0h6dmrw4oke3" path="res://Scripts/fps_label.gd" id="4_frnsy"]
+[ext_resource type="Texture2D" uid="uid://dynbf4xkd25d4" path="res://Assets/HUD/at.png" id="6_8oijl"]
+[ext_resource type="Texture2D" uid="uid://dh1d8m6hbti0y" path="res://Assets/HUD/leftt.png" id="7_4ed32"]
+[ext_resource type="Texture2D" uid="uid://b305ryau0gegc" path="res://Assets/HUD/rightt.png" id="8_us4cf"]
+[ext_resource type="Texture2D" uid="uid://bnq2x80dpdt54" path="res://Assets/HUD/downt.png" id="9_qecx7"]
+[ext_resource type="Texture2D" uid="uid://dv1ds633p87wk" path="res://Assets/HUD/upt.png" id="10_0hwcy"]
+[ext_resource type="Texture2D" uid="uid://bscmqow618q21" path="res://Assets/HUD/pause.png" id="11_8oijl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j41el"]
+size = Vector2(11, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8oijl"]
+size = Vector2(12, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ed32"]
+size = Vector2(12, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_us4cf"]
+size = Vector2(9, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qecx7"]
+size = Vector2(13, 13)
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -14,6 +36,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_j41el")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
 light_mask = 1023
@@ -85,3 +108,56 @@ offset_right = 308.0
 offset_bottom = -143.0
 grow_horizontal = 0
 script = ExtResource("4_frnsy")
+
+[node name="Attack" type="TouchScreenButton" parent="."]
+position = Vector2(214, 54)
+scale = Vector2(5, 5)
+texture_normal = ExtResource("6_8oijl")
+shape = SubResource("RectangleShape2D_j41el")
+action = "Hit"
+
+[node name="Left" type="TouchScreenButton" parent="."]
+position = Vector2(-322, 46.000004)
+scale = Vector2(5, 5)
+texture_normal = ExtResource("7_4ed32")
+shape = SubResource("RectangleShape2D_8oijl")
+action = "ui_left"
+
+[node name="Right" type="TouchScreenButton" parent="."]
+position = Vector2(-213.00002, 42)
+scale = Vector2(5, 5)
+texture_normal = ExtResource("8_us4cf")
+shape = SubResource("RectangleShape2D_4ed32")
+action = "ui_right"
+
+[node name="Down" type="TouchScreenButton" parent="."]
+position = Vector2(-252.00002, 91.999985)
+scale = Vector2(5, 5)
+texture_normal = ExtResource("9_qecx7")
+shape = SubResource("RectangleShape2D_us4cf")
+action = "ui_down"
+
+[node name="Up" type="TouchScreenButton" parent="."]
+position = Vector2(-256.00003, -24.000011)
+scale = Vector2(5, 5)
+texture_normal = ExtResource("10_0hwcy")
+shape = SubResource("RectangleShape2D_qecx7")
+action = "ui_up"
+
+[node name="Pause" type="TouchScreenButton" parent="."]
+position = Vector2(-309, -146)
+scale = Vector2(3.750002, 3.6874986)
+texture_normal = ExtResource("11_8oijl")
+shape = SubResource("RectangleShape2D_qecx7")
+action = "ui_cancel"
+
+[connection signal="pressed" from="Attack" to="." method="_on_attack_pressed"]
+[connection signal="released" from="Attack" to="." method="_on_attack_released"]
+[connection signal="pressed" from="Left" to="." method="_on_left_pressed"]
+[connection signal="released" from="Left" to="." method="_on_left_released"]
+[connection signal="pressed" from="Right" to="." method="_on_right_pressed"]
+[connection signal="released" from="Right" to="." method="_on_right_released"]
+[connection signal="pressed" from="Down" to="." method="_on_down_pressed"]
+[connection signal="released" from="Down" to="." method="_on_down_released"]
+[connection signal="pressed" from="Up" to="." method="_on_up_pressed"]
+[connection signal="released" from="Up" to="." method="_on_up_released"]
