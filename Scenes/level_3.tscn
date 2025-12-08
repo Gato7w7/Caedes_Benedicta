@@ -1154,7 +1154,7 @@ position = Vector2(184, 172)
 position = Vector2(-130, 172)
 
 [node name="Enemigo5" parent="." instance=ExtResource("3_vwg62")]
-position = Vector2(18, 162)
+position = Vector2(62, 167)
 
 [node name="StartPosition" type="Marker2D" parent="."]
 position = Vector2(3, 147)
