@@ -18,14 +18,14 @@ size = Vector2(11, 11)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8oijl"]
 size = Vector2(12, 10)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qecx7"]
+size = Vector2(13, 13)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ed32"]
 size = Vector2(12, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_us4cf"]
 size = Vector2(9, 12)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qecx7"]
-size = Vector2(13, 13)
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -109,55 +109,68 @@ offset_bottom = -143.0
 grow_horizontal = 0
 script = ExtResource("4_frnsy")
 
-[node name="Attack" type="TouchScreenButton" parent="."]
+[node name="controls" type="Node2D" parent="."]
+
+[node name="Attack" type="TouchScreenButton" parent="controls"]
 position = Vector2(214, 54)
 scale = Vector2(5, 5)
 texture_normal = ExtResource("6_8oijl")
 shape = SubResource("RectangleShape2D_j41el")
+passby_press = true
 action = "Hit"
 
-[node name="Left" type="TouchScreenButton" parent="."]
-position = Vector2(-322, 46.000004)
+[node name="Left" type="TouchScreenButton" parent="controls"]
+position = Vector2(-322, 46)
 scale = Vector2(5, 5)
 texture_normal = ExtResource("7_4ed32")
 shape = SubResource("RectangleShape2D_8oijl")
+passby_press = true
 action = "ui_left"
+visibility_mode = 1
 
-[node name="Right" type="TouchScreenButton" parent="."]
-position = Vector2(-213.00002, 42)
-scale = Vector2(5, 5)
-texture_normal = ExtResource("8_us4cf")
-shape = SubResource("RectangleShape2D_4ed32")
-action = "ui_right"
-
-[node name="Down" type="TouchScreenButton" parent="."]
-position = Vector2(-252.00002, 91.999985)
-scale = Vector2(5, 5)
-texture_normal = ExtResource("9_qecx7")
-shape = SubResource("RectangleShape2D_us4cf")
-action = "ui_down"
-
-[node name="Up" type="TouchScreenButton" parent="."]
-position = Vector2(-256.00003, -24.000011)
+[node name="Up" type="TouchScreenButton" parent="controls"]
+position = Vector2(-256.00003, -24.000015)
 scale = Vector2(5, 5)
 texture_normal = ExtResource("10_0hwcy")
 shape = SubResource("RectangleShape2D_qecx7")
+passby_press = true
 action = "ui_up"
+visibility_mode = 1
 
-[node name="Pause" type="TouchScreenButton" parent="."]
+[node name="Pause" type="TouchScreenButton" parent="controls"]
 position = Vector2(-309, -146)
 scale = Vector2(3.750002, 3.6874986)
 texture_normal = ExtResource("11_8oijl")
 shape = SubResource("RectangleShape2D_qecx7")
+passby_press = true
 action = "ui_cancel"
+visibility_mode = 1
 
-[connection signal="pressed" from="Attack" to="." method="_on_attack_pressed"]
-[connection signal="released" from="Attack" to="." method="_on_attack_released"]
-[connection signal="pressed" from="Left" to="." method="_on_left_pressed"]
-[connection signal="released" from="Left" to="." method="_on_left_released"]
-[connection signal="pressed" from="Right" to="." method="_on_right_pressed"]
-[connection signal="released" from="Right" to="." method="_on_right_released"]
-[connection signal="pressed" from="Down" to="." method="_on_down_pressed"]
-[connection signal="released" from="Down" to="." method="_on_down_released"]
-[connection signal="pressed" from="Up" to="." method="_on_up_pressed"]
-[connection signal="released" from="Up" to="." method="_on_up_released"]
+[node name="Right" type="TouchScreenButton" parent="controls"]
+position = Vector2(-213.00002, 42)
+scale = Vector2(5, 5)
+texture_normal = ExtResource("8_us4cf")
+shape = SubResource("RectangleShape2D_4ed32")
+passby_press = true
+action = "ui_right"
+visibility_mode = 1
+
+[node name="Down" type="TouchScreenButton" parent="controls"]
+position = Vector2(-252.00002, 92)
+scale = Vector2(5, 5)
+texture_normal = ExtResource("9_qecx7")
+shape = SubResource("RectangleShape2D_us4cf")
+passby_press = true
+action = "ui_down"
+visibility_mode = 1
+
+[connection signal="pressed" from="controls/Attack" to="." method="_on_attack_pressed"]
+[connection signal="released" from="controls/Attack" to="." method="_on_attack_released"]
+[connection signal="pressed" from="controls/Left" to="." method="_on_left_pressed"]
+[connection signal="released" from="controls/Left" to="." method="_on_left_released"]
+[connection signal="pressed" from="controls/Up" to="." method="_on_up_pressed"]
+[connection signal="released" from="controls/Up" to="." method="_on_up_released"]
+[connection signal="pressed" from="controls/Right" to="." method="_on_right_pressed"]
+[connection signal="released" from="controls/Right" to="." method="_on_right_released"]
+[connection signal="pressed" from="controls/Down" to="." method="_on_down_pressed"]
+[connection signal="released" from="controls/Down" to="." method="_on_down_released"]
